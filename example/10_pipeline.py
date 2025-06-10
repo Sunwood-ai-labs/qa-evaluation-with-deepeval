@@ -14,7 +14,7 @@ class QAEvaluationPipeline:
             evaluation_steps=config["steps"],
             evaluation_params=config["params"],
             threshold=config["threshold"],
-            model=config.get("model", "gpt-4o")
+            model=config.get("model", "o3")
         )
     def evaluate_qa_batch(self, qa_pairs):
         """QAペアのバッチ評価"""

@@ -11,7 +11,7 @@ gpt4_judge = GEval(
         "論理的一貫性を確認する"
     ],
     evaluation_params=[LLMTestCaseParams.INPUT, LLMTestCaseParams.ACTUAL_OUTPUT],
-    model="gpt-4o",
+    model="o3",
     threshold=0.8
 )
 
