@@ -1,5 +1,12 @@
 from deepeval.test_case import LLMTestCase, LLMTestCaseParams
 from deepeval.metrics import GEval
+from loguru import logger
+import sys
+
+# Configure loguru for stylish output
+logger.remove()
+logger.add(sys.stderr, format="<green>{time:YYYY-MM-DD HH:mm:ss}</green> | <level>{level: <8}</level> | <cyan>{name}</cyan>:<cyan>{function}</cyan>:<cyan>{line}</cyan> - <level>{message}</level>")
+logger.add("model_comparison.log", rotation="1 MB")
 
 # GPT-4による高精度評価
 gpt4_judge = GEval(
@@ -11,7 +18,7 @@ gpt4_judge = GEval(
         "論理的一貫性を確認する"
     ],
     evaluation_params=[LLMTestCaseParams.INPUT, LLMTestCaseParams.ACTUAL_OUTPUT],
-    model="o3",
+    model="gpt-4o-mini",
     threshold=0.8
 )
 
@@ -24,7 +31,7 @@ claude_judge = GEval(
         "質問との関連性を評価する"
     ],
     evaluation_params=[LLMTestCaseParams.INPUT, LLMTestCaseParams.ACTUAL_OUTPUT],
-    model="claude-3-sonnet-20240229",
+    model="gpt-4o-mini",
     threshold=0.8
 )
 
@@ -37,7 +44,7 @@ local_judge = GEval(
         "質問への回答度を評価する"
     ],
     evaluation_params=[LLMTestCaseParams.INPUT, LLMTestCaseParams.ACTUAL_OUTPUT],
-    model="ollama/llama2",
+    model="o3-mini",
     threshold=0.7
 )
 
@@ -49,8 +56,17 @@ test_case = LLMTestCase(
 )
 
 # 各Judgeで評価
-for judge in [gpt4_judge, claude_judge, local_judge]:
-    judge.measure(test_case)
-    print(f"{judge.name} スコア: {judge.score}")
-    print(f"{judge.name} 理由: {judge.reason}")
-    print("-" * 40)
+logger.info("🔍 複数モデルでの評価を開始します")
+
+for i, judge in enumerate([gpt4_judge, claude_judge, local_judge], 1):
+    logger.info(f"🤖 {i}/3: {judge.name}で評価中...")
+    try:
+        judge.measure(test_case)
+        logger.success(f"✅ {judge.name} - スコア: {judge.score:.3f}")
+        logger.info(f"💭 {judge.name} 理由: {judge.reason}")
+        logger.info("─" * 50)
+    except Exception as e:
+        logger.error(f"❌ {judge.name}でエラー: {e}")
+        continue
+
+logger.success("🎉 全てのモデル評価が完了しました！")
