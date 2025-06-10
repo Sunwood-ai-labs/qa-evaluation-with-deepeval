@@ -1,0 +1,10 @@
+version: "3.9"
+services:
+  app:
+    build: .
+    volumes:
+      - ./example:/workspace/example
+    working_dir: /workspace/example
+    env_file:
+      - .env
+    tty: true
