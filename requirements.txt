@@ -1,0 +1,5 @@
+deepeval
+openai
+pandas
+matplotlib
+seaborn
