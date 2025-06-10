@@ -195,3 +195,6 @@ cython_debug/
 .SourceSageAssets/COMMIT_CRAFT/STAGE_INFO/STAGE_INFO_AND_PROMT_GAIAH_B.md
 .SourceSageAssets/ISSUE_LOG/open_issues_filtered.json
 .SourceSageAssets/
+example/.deepeval/.deepeval_telemetry.txt
+example/.deepeval/.deepeval*
+example/.deepeval/.latest_test_run.json
