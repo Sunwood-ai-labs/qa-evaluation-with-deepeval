@@ -87,6 +87,9 @@ python 13_litellm_japanese_judge.py
 
 # 🌐 Langfuse連携日本語Judge
 python 14_litellm_japanese_judge_langfuse.py
+
+# 🏆 Langfuse連携日本語Judge（バッチ版・LiteLLM対応）
+python 15_litellm_japanese_judge_langfuse_batch.py
 ```
 
 ## 🔧 技術スタック・依存パッケージ
@@ -152,6 +155,8 @@ qa-evaluation-with-deepeval/
   詳細なセットアップ・トラブルシューティング・カスタマイズ方法を記載しています。
 - **example/**
   DeepEvalを用いた各種評価スクリプト・補助モジュール・サンプルデータ・ログを格納しています。
+- **example/15_litellm_japanese_judge_langfuse_batch.py**
+  Langfuse連携＋LiteLLM日本語Judgeのバッチ評価版。CSVから複数テストケースを一括評価し、各結果をLangfuseに記録します。
 
 ## ⚠️ 重要な注意事項
 
