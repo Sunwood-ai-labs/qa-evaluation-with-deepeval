@@ -135,7 +135,7 @@ try:
     
     # 結果をJSON形式で表示
     logger.info("📋 詳細結果:")
-    print(json.dumps(evaluation_results, ensure_ascii=False, indent=2))
+    logger.info(json.dumps(evaluation_results, ensure_ascii=False, indent=2))
     
 except Exception as e:
     logger.error(f"❌ パイプライン実行中にエラー: {e}")

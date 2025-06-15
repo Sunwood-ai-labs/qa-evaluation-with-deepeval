@@ -1,5 +1,6 @@
 from deepeval.test_case import LLMTestCase, LLMTestCaseParams
 from deepeval.metrics import GEval
+from loguru import logger
 
 # 正確性評価
 accuracy_judge = GEval(
@@ -71,6 +72,6 @@ test_case = LLMTestCase(
 # 各Judgeで評価
 for judge in [accuracy_judge, completeness_judge, clarity_judge, relevance_judge]:
     judge.measure(test_case)
-    print(f"{judge.name} スコア: {judge.score}")
-    print(f"{judge.name} 理由: {judge.reason}")
-    print("-" * 40)
+    logger.info(f"{judge.name} スコア: {judge.score}")
+    logger.info(f"{judge.name} 理由: {judge.reason}")
+    logger.info("-" * 40)

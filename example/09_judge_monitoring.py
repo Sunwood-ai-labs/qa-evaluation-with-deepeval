@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+from loguru import logger
 
 def evaluate_judge_performance(ground_truth_df, judge_results_df):
     """Judgeの判定精度を人間評価と比較"""
@@ -42,7 +43,7 @@ judge_results_df = pd.DataFrame({
 })
 
 perf = evaluate_judge_performance(ground_truth_df, judge_results_df)
-print("Judge性能評価:", perf)
+logger.info(f"Judge性能評価: {perf}")
 
 validation_results = [
     {"score": 0.9, "human_label": 1},
@@ -52,4 +53,4 @@ validation_results = [
     {"score": 0.95, "human_label": 1}
 ]
 thresh, prec = calibrate_judge_threshold(validation_results, target_precision=0.8)
-print(f"最適閾値: {thresh}, precision: {prec}")
+logger.info(f"最適閾値: {thresh}, precision: {prec}")

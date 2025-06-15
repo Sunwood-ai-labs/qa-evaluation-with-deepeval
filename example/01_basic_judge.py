@@ -28,7 +28,7 @@ correctness_judge = GEval(
         LLMTestCaseParams.EXPECTED_OUTPUT
     ],
     threshold=0.7,
-    model="gpt-4o-mini"
+    model="o3-mini"
 )
 
 # テストケース

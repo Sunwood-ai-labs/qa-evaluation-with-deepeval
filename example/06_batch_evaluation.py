@@ -3,6 +3,7 @@ from deepeval.test_case import LLMTestCase, LLMTestCaseParams
 from deepeval.metrics import GEval
 from deepeval.dataset import EvaluationDataset
 from deepeval import evaluate
+from loguru import logger
 
 # CSVファイル読み込み
 df = pd.read_csv("qa_dataset.csv")
@@ -85,5 +86,5 @@ results = evaluate(
     show_indicator=True
 )
 
-print(f"全体スコア: {results.overall_score}")
-print(f"評価完了件数: {len(results.test_results)}")
+logger.info(f"全体スコア: {results.overall_score}")
+logger.info(f"評価完了件数: {len(results.test_results)}")
