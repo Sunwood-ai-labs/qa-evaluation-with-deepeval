@@ -198,3 +198,4 @@ cython_debug/
 example/.deepeval/.deepeval_telemetry.txt
 example/.deepeval/.deepeval*
 example/.deepeval/.latest_test_run.json
+.deepeval/
