@@ -3,8 +3,8 @@ services:
   app:
     build: .
     volumes:
-      - ./example:/workspace/example
-    working_dir: /workspace/example
+      - ./:/workspace
+    working_dir: /workspace
     env_file:
       - .env
     tty: true
