@@ -2,11 +2,10 @@ from deepeval.test_case import LLMTestCase, LLMTestCaseParams
 from deepeval.metrics import GEval
 from loguru import logger
 import sys
+from dotenv import load_dotenv
 
-# Configure loguru for stylish output
-logger.remove()
-logger.add(sys.stderr, format="<green>{time:YYYY-MM-DD HH:mm:ss}</green> | <level>{level: <8}</level> | <cyan>{name}</cyan>:<cyan>{function}</cyan>:<cyan>{line}</cyan> - <level>{message}</level>")
-logger.add("evaluation.log", rotation="1 MB")
+# .envファイルをロード
+load_dotenv()
 
 # LLM as a Judge メトリック定義
 correctness_judge = GEval(
@@ -29,7 +28,7 @@ correctness_judge = GEval(
         LLMTestCaseParams.EXPECTED_OUTPUT
     ],
     threshold=0.7,
-    model="gpt-4o-mini"
+    model="o3-mini"
 )
 
 # テストケース

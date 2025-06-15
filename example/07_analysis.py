@@ -1,5 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+from loguru import logger
 
 # 06_batch_evaluation.pyで得られたresultsをimportまたは再実行して取得してください
 # ここではresultsが既に存在している前提です
@@ -39,10 +40,10 @@ low_score_threshold = 0.6
 for judge_name in judges_names:
     low_scores = df_results[df_results[f"{judge_name}_score"] < low_score_threshold]
     if not low_scores.empty:
-        print(f"\n=== {judge_name} 低スコア項目 ===")
+        logger.info(f"\n=== {judge_name} 低スコア項目 ===")
         for idx, row in low_scores.iterrows():
-            print(f"質問: {row['question']}")
-            print(f"回答: {row['answer']}")
-            print(f"スコア: {row[f'{judge_name}_score']}")
-            print(f"理由: {row[f'{judge_name}_reason']}")
-            print("-" * 50)
+            logger.info(f"質問: {row['question']}")
+            logger.info(f"回答: {row['answer']}")
+            logger.info(f"スコア: {row[f'{judge_name}_score']}")
+            logger.info(f"理由: {row[f'{judge_name}_reason']}")
+            logger.info("-" * 50)

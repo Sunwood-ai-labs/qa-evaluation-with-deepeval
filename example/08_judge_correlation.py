@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
+from loguru import logger
 
 # 07_analysis.pyで作成したdf_resultsをimportまたは再利用してください
 
@@ -39,14 +40,14 @@ def find_disagreement_cases(df, threshold=0.3):
     return sorted(disagreement_cases, key=lambda x: x["std"], reverse=True)
 
 disagreements = find_disagreement_cases(df_results)
-print(f"Judge間意見相違項目: {len(disagreements)}件")
+logger.info(f"Judge間意見相違項目: {len(disagreements)}件")
 
 # 上位5件の詳細表示
 for i, case in enumerate(disagreements[:5]):
-    print(f"\n=== 意見相違ケース {i+1} (標準偏差: {case['std']:.3f}) ===")
-    print(f"質問: {case['question']}")
-    print(f"回答: {case['answer']}")
+    logger.info(f"\n=== 意見相違ケース {i+1} (標準偏差: {case['std']:.3f}) ===")
+    logger.info(f"質問: {case['question']}")
+    logger.info(f"回答: {case['answer']}")
     for judge_name in judges_names:
         score = case['scores'][judge_name]
         reason = df_results.iloc[case['index']][f"{judge_name}_reason"]
-        print(f"{judge_name}: {score:.3f} - {reason}")
+        logger.info(f"{judge_name}: {score:.3f} - {reason}")

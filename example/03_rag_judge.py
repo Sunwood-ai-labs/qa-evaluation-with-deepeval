@@ -1,5 +1,6 @@
 from deepeval.test_case import LLMTestCase, LLMTestCaseParams
 from deepeval.metrics import GEval
+from loguru import logger
 
 # 忠実性評価（Faithfulness）
 faithfulness_judge = GEval(
@@ -50,6 +51,6 @@ rag_test_case = LLMTestCase(
 # 各Judgeで評価
 for judge in [faithfulness_judge, context_utilization_judge]:
     judge.measure(rag_test_case)
-    print(f"{judge.name} スコア: {judge.score}")
-    print(f"{judge.name} 理由: {judge.reason}")
-    print("-" * 40)
+    logger.info(f"{judge.name} スコア: {judge.score}")
+    logger.info(f"{judge.name} 理由: {judge.reason}")
+    logger.info("-" * 40)

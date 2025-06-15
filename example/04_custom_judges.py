@@ -1,5 +1,6 @@
 from deepeval.test_case import LLMTestCase, LLMTestCaseParams
 from deepeval.metrics import GEval
+from loguru import logger
 
 # 医療分野向けJudge
 medical_accuracy_judge = GEval(
@@ -61,11 +62,11 @@ legal_case = LLMTestCase(
 
 # 評価実行
 medical_accuracy_judge.measure(medical_case)
-print(f"MedicalAccuracy スコア: {medical_accuracy_judge.score}")
-print(f"理由: {medical_accuracy_judge.reason}")
-print("-" * 40)
+logger.info(f"MedicalAccuracy スコア: {medical_accuracy_judge.score}")
+logger.info(f"理由: {medical_accuracy_judge.reason}")
+logger.info("-" * 40)
 
 legal_compliance_judge.measure(legal_case)
-print(f"LegalCompliance スコア: {legal_compliance_judge.score}")
-print(f"理由: {legal_compliance_judge.reason}")
-print("-" * 40)
+logger.info(f"LegalCompliance スコア: {legal_compliance_judge.score}")
+logger.info(f"理由: {legal_compliance_judge.reason}")
+logger.info("-" * 40)
