@@ -1,0 +1,6 @@
+deepeval
+openai
+pandas
+matplotlib
+seaborn
+loguru
