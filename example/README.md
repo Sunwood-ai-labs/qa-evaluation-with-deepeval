@@ -23,6 +23,11 @@
 | [08_judge_correlation.py](#08-judge間の一致度分析) | Judge間の一致度分析 | 評価者間信頼性 | 🔴 上級 |
 | [09_judge_monitoring.py](#09-継続的モニタリング) | 継続的モニタリング | 性能監視・校正 | 🔴 上級 |
 | [10_pipeline.py](#10-パイプライン実装例) | パイプライン実装例 | 本番運用システム | 🔴 上級 |
+| [11_litellm_custom_judge.py](#11-litellmカスタムjudge) | LiteLLMカスタムJudge | 独自Judge+LiteLLM | 🔴 上級 |
+| [12_japanese_geval_judge.py](#12-日本語geval-judge) | 日本語GEval Judge | 日本語評価・多言語 | 🔴 上級 |
+| [13_litellm_japanese_judge.py](#13-litellm日本語judge) | LiteLLM日本語Judge | LiteLLM+日本語評価 | 🔴 上級 |
+| [14_litellm_japanese_judge_langfuse.py](#14-langfuse連携日本語judge) | Langfuse連携日本語Judge | Langfuse連携・日本語 | 🔴 上級 |
+| [15_litellm_japanese_judge_langfuse_batch.py](#15-langfuse連携日本語judgeバッチ) | Langfuse連携日本語Judge（バッチ） | LiteLLM+Langfuseバッチ評価 | 🔴 上級 |
 
 ## 🎯 各スクリプトの詳細
 
@@ -279,10 +284,84 @@ pipeline = QAEvaluationPipeline(
 results = pipeline.evaluate_batch(test_cases)
 ```
 
-## 📊 データファイル
+### 11. LiteLLMカスタムJudge
+**ファイル:** `11_litellm_custom_judge.py`
+
+**概要:**
+LiteLLM経由でローカル/プロキシLLMをJudgeとして利用するカスタムJudge実装例。
+
+**主要機能:**
+- 🦾 **LiteLLM**を用いたJudge評価
+- 🛠️ **独自評価基準**の実装
+- 📡 外部API/ローカルLLM連携
+
+---
+
+### 12. 日本語GEval Judge
+**ファイル:** `12_japanese_geval_judge.py`
+
+**概要:**
+日本語でのGEval評価を行うサンプル。多言語対応や日本語特化の評価基準例を含む。
+
+**主要機能:**
+- 🇯🇵 **日本語評価基準**の実装
+- 📝 **多言語Judge**のサンプル
+- 🧩 GEvalのカスタマイズ
+
+---
+
+### 13. LiteLLM日本語Judge
+**ファイル:** `13_litellm_japanese_judge.py`
+
+**概要:**
+LiteLLM経由で日本語Judgeを実行する例。ローカルLLMやAPI経由の日本語評価に対応。
+
+**主要機能:**
+- 🦾 **LiteLLM**+**日本語Judge**
+- 🌐 **ローカル/クラウドLLM**両対応
+- � 日本語データセット評価
+
+---
+
+### 14. Langfuse連携日本語Judge
+**ファイル:** `14_litellm_japanese_judge_langfuse.py`
+
+**概要:**
+Langfuseと連携し、日本語Judgeの評価ログを管理・可視化するサンプル。
+
+**主要機能:**
+- 🌐 **Langfuse**連携
+- 🇯🇵 **日本語Judge**の評価ログ管理
+- 📈 評価結果の可視化・分析
+
+---
+
+### 15. Langfuse連携日本語Judge（バッチ）
+**ファイル:** `15_litellm_japanese_judge_langfuse_batch.py`
+
+**概要:**
+Langfuseと連携し、LiteLLM日本語Judgeによるバッチ評価を実行。CSVから複数テストケースを一括評価し、各結果をLangfuseに記録します。
+
+**主要機能:**
+- 🌐 **Langfuse**連携（バッチ対応）
+- 🦾 **LiteLLM**日本語Judge
+- 📦 **CSV一括評価・記録**
+
+
+## 📊 データファイル・補助モジュール・ログ
 
 ### qa_dataset.csv
 **概要**: バッチ評価用のサンプルデータセット
+
+### litellm_model.py
+**概要**: LiteLLM用のJudgeモデル定義・補助関数
+
+### evaluation.log / model_comparison.log / pipeline.log
+**概要**: 各種スクリプトの実行ログファイル
+
+### __init__.py
+**概要**: exampleディレクトリのパッケージ初期化用（通常編集不要）
+
 
 **構造:**
 - `question`: 質問文
